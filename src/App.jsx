@@ -1,9 +1,13 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+
 function App() {
   return (
-    <div>
-      <h1>Fast Import 🚗</h1>
-      <p>Importation et vente de véhicules en France et en Europe.</p>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
