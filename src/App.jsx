@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import VehicleDetails from "./pages/VehicleDetails";
+import Payment from "./pages/Payment";
 
 function App() {
   return (
@@ -9,6 +11,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/vehicle/:id" element={<VehicleDetails />} />
+
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </BrowserRouter>
   );

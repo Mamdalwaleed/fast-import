@@ -1,0 +1,44 @@
+.payment-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+}
+
+.payment-container {
+  width: 500px;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.payment-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.payment-form input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.card-details {
+  display: flex;
+  gap: 20px;
+}
+
+.card-details label {
+  flex: 1;
+}
+
+.payment-form button {
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: none;
+}

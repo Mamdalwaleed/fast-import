@@ -1,0 +1,34 @@
+.car-card {
+  border-radius: 15px;
+  overflow: hidden;
+  background: #1a1a1a;
+  color: white;
+  width: 300px;
+}
+
+.car-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.car-info {
+  padding: 20px;
+}
+
+.car-info h2 {
+  margin-bottom: 15px;
+}
+
+.car-info strong {
+  display: block;
+  margin: 15px 0;
+  font-size: 22px;
+}
+
+.car-info button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}

@@ -1,21 +1,29 @@
 .navbar {
-  height: 80px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 60px;
-  background: #111;
+  padding: 0 70px;
+  background: #050505;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
 }
 
 .logo {
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 800;
   color: white;
+}
+
+.logo span {
+  color: #e50914;
 }
 
 .nav-links {
   display: flex;
-  gap: 30px;
+  gap: 35px;
   list-style: none;
 }
 
@@ -25,10 +33,11 @@
 }
 
 .login-btn {
-  background: white;
-  color: black;
+  background: #e50914;
+  color: white;
   border: none;
-  padding: 12px 25px;
-  border-radius: 25px;
+  padding: 13px 28px;
+  border-radius: 30px;
   cursor: pointer;
+  font-weight: bold;
 }

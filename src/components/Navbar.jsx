@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <Link to="/" className="logo">
-        Fast Import
+        Fast<span>Import</span>
       </Link>
 
       <ul className="nav-links">
