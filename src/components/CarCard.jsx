@@ -1,27 +1,23 @@
-import "./CarCard.css";
 import { Link } from "react-router-dom";
+import "./CarCard.css";
 
 function CarCard({ car }) {
   return (
-    <article className="car-card">
-      <img src={car.image} alt={`${car.brand} ${car.model}`} />
+    <div className="car-card">
+      <img src={car.image} alt={car.model} />
 
-      <div className="car-info">
-        <h2>
-          {car.brand} {car.model}
-        </h2>
+      <h3>
+        {car.brand} {car.model}
+      </h3>
 
-        <p>Année : {car.year}</p>
+      <p>
+        {car.year} - {car.mileage} km
+      </p>
 
-        <p>Kilométrage : {car.mileage} km</p>
+      <strong>{car.price.toLocaleString("fr-FR")} €</strong>
 
-        <strong>{car.price} €</strong>
-
-        <button>
-          <Link to={`/vehicle/${car.id}`}>Voir le véhicule</Link>
-        </button>
-      </div>
-    </article>
+      <Link to={`/vehicle/${car.id}`}>Voir le véhicule</Link>
+    </div>
   );
 }
 

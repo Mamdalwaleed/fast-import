@@ -4,45 +4,47 @@ function Payment() {
   return (
     <main className="payment-page">
       <section className="payment-container">
-        <h1>Paiement</h1>
+        <div className="payment-summary">
+          <h2>Votre véhicule</h2>
 
-        <p>Finalisez votre achat en renseignant vos informations.</p>
+          <div className="vehicle-card">
+            <h3>BMW M340i</h3>
 
-        <form className="payment-form">
-          <label>
-            Nom complet
-            <input type="text" placeholder="Votre nom" />
-          </label>
+            <p>Année : 2023</p>
 
-          <label>
-            Adresse e-mail
-            <input type="email" placeholder="exemple@email.com" />
-          </label>
+            <p>Kilométrage : 18 000 km</p>
 
-          <label>
-            Adresse de livraison
-            <input type="text" placeholder="Votre adresse" />
-          </label>
+            <strong>52 990 €</strong>
+          </div>
+        </div>
 
-          <label>
-            Numéro de carte
-            <input type="text" placeholder="1234 5678 9012 3456" />
-          </label>
+        <div className="payment-form">
+          <h1>Paiement sécurisé</h1>
 
-          <div className="card-details">
-            <label>
-              Date d'expiration
-              <input type="text" placeholder="MM/AA" />
-            </label>
+          <p className="subtitle">Finalisez votre achat Fast Import</p>
 
-            <label>
-              Cryptogramme
-              <input type="password" placeholder="CVV" />
-            </label>
+          <label>Nom complet</label>
+
+          <input type="text" placeholder="Votre nom" />
+
+          <label>Email</label>
+
+          <input type="email" placeholder="exemple@email.com" />
+
+          <label>Numéro de carte</label>
+
+          <input type="text" placeholder="1234 5678 9012 3456" />
+
+          <div className="card-row">
+            <input type="text" placeholder="MM / AA" />
+
+            <input type="text" placeholder="CVC" />
           </div>
 
-          <button type="submit">Payer maintenant</button>
-        </form>
+          <button>Payer 52 990 €</button>
+
+          <p className="secure">🔒 Paiement sécurisé</p>
+        </div>
       </section>
     </main>
   );

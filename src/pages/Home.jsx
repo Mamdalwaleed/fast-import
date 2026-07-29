@@ -1,5 +1,7 @@
 import "./Home.css";
+
 import heroImg from "../assets/hero.png";
+
 import CarCard from "../components/CarCard";
 
 function Home() {
@@ -13,6 +15,7 @@ function Home() {
       price: 52990,
       image: heroImg,
     },
+
     {
       id: 2,
       brand: "Audi",
@@ -26,9 +29,8 @@ function Home() {
 
   return (
     <main>
-      {/* HERO */}
       <section className="hero">
-        <div className="hero-content">
+        <div>
           <h1>
             Votre voiture,
             <br />
@@ -36,21 +38,18 @@ function Home() {
           </h1>
 
           <p>
-            Fast Import sélectionne et vend des véhicules en provenance d'Europe
-            et disponibles en France.
+            Fast Import sélectionne des véhicules premium en Europe et en
+            France.
           </p>
 
-          <div className="hero-buttons">
-            <button>Voir les véhicules</button>
-
-            <button className="secondary">Importer une voiture</button>
-          </div>
+          <button>Voir les véhicules</button>
         </div>
+
+        <img src={heroImg} alt="voiture" />
       </section>
 
-      {/* CATALOGUE VOITURES */}
       <section className="cars-section">
-        <h2>Nos véhicules disponibles</h2>
+        <h2>Nos véhicules</h2>
 
         <div className="cars-container">
           {cars.map((car) => (

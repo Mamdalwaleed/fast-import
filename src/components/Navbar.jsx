@@ -3,31 +3,23 @@ import "./Navbar.css";
 
 function Navbar() {
   return (
-    <nav className="navbar">
+    <header className="navbar">
       <Link to="/" className="logo">
-        Fast<span>Import</span>
+        Fast <span>Import</span>
       </Link>
 
-      <ul className="nav-links">
-        <li>
-          <Link to="/">Accueil</Link>
-        </li>
+      <nav className="nav-menu">
+        <Link to="/">Accueil</Link>
 
-        <li>
-          <Link to="/vehicles">Véhicules</Link>
-        </li>
+        <Link to="/">Véhicules</Link>
 
-        <li>
-          <Link to="/import">Importation</Link>
-        </li>
+        <Link to="/">Import</Link>
+      </nav>
 
-        <li>
-          <Link to="/contact">Contact</Link>
-        </li>
-      </ul>
-
-      <button className="login-btn">Connexion</button>
-    </nav>
+      <Link to="/login" className="login-button">
+        Connexion
+      </Link>
+    </header>
   );
 }
 

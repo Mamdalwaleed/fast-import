@@ -4,77 +4,74 @@ import heroImg from "../assets/hero.png";
 
 function VehicleDetails() {
   const { id } = useParams();
+
   const navigate = useNavigate();
 
-  // Données temporaires (seront remplacées par ton API MongoDB plus tard)
   const car = {
     id: id,
+
     brand: "BMW",
+
     model: "M340i",
+
     year: 2023,
+
     mileage: 18000,
+
     fuel: "Essence",
+
     gearbox: "Automatique",
-    power: "374 ch",
-    color: "Noir",
+
     price: 52990,
+
     description:
-      "Véhicule premium en excellent état, importé d'Europe avec historique complet. Entretien suivi et véhicule disponible immédiatement.",
+      "Véhicule premium en excellent état. Importé d'Europe avec historique complet et suivi professionnel.",
+
     image: heroImg,
   };
 
-  // Redirection vers la page paiement
-  const handleBuy = () => {
-    navigate("/payment");
-  };
-
   return (
-    <main className="vehicle-details">
-      <div className="vehicle-image">
-        <img src={car.image} alt={`${car.brand} ${car.model}`} />
-      </div>
-
-      <section className="vehicle-info">
-        <h1>
-          {car.brand} {car.model}
-        </h1>
-
-        <h2>{car.price.toLocaleString("fr-FR")} €</h2>
-
-        <div className="vehicle-specs">
-          <p>
-            <strong>Année :</strong> {car.year}
-          </p>
-
-          <p>
-            <strong>Kilométrage :</strong> {car.mileage.toLocaleString("fr-FR")}{" "}
-            km
-          </p>
-
-          <p>
-            <strong>Carburant :</strong> {car.fuel}
-          </p>
-
-          <p>
-            <strong>Boîte :</strong> {car.gearbox}
-          </p>
-
-          <p>
-            <strong>Puissance :</strong> {car.power}
-          </p>
-
-          <p>
-            <strong>Couleur :</strong> {car.color}
-          </p>
+    <main className="vehicle-page">
+      <section className="vehicle-container">
+        <div className="vehicle-image">
+          <img src={car.image} alt={`${car.brand} ${car.model}`} />
         </div>
 
-        <div className="vehicle-description">
-          <h3>Description</h3>
+        <div className="vehicle-content">
+          <h1>
+            {car.brand} {car.model}
+          </h1>
 
-          <p>{car.description}</p>
+          <p className="description">{car.description}</p>
+
+          <div className="vehicle-details-grid">
+            <div>
+              <span>Année</span>
+              <strong>{car.year}</strong>
+            </div>
+
+            <div>
+              <span>Kilométrage</span>
+              <strong>{car.mileage} km</strong>
+            </div>
+
+            <div>
+              <span>Carburant</span>
+              <strong>{car.fuel}</strong>
+            </div>
+
+            <div>
+              <span>Boîte</span>
+              <strong>{car.gearbox}</strong>
+            </div>
+          </div>
+
+          <h2 className="price">{car.price.toLocaleString("fr-FR")} €</h2>
+
+          <button onClick={() => navigate("/payment")}>
+            Acheter maintenant
+          </button>
         </div>
-
-        <button onClick={handleBuy}>Acheter maintenant</button>
       </section>
     </main>
   );
