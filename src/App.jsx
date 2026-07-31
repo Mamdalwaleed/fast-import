@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import VehicleDetails from "./pages/VehicleDetails";
 import Payment from "./pages/Payment";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/vehicle/:id" element={<VehicleDetails />} />
 
         <Route path="/payment" element={<Payment />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

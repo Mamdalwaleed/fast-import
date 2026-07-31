@@ -1,34 +1,41 @@
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
 
-  const { login } = useAuth();
-
   const handleLogin = (e) => {
     e.preventDefault();
 
-    login({
-      name: "Client",
-
-      email: "client@test.com",
-    });
-
+    // Plus tard ici on fera l'appel au backend
     navigate("/payment");
   };
 
   return (
-    <main>
-      <h1>Connexion</h1>
+    <main className="login-page">
+      <div className="login-card">
+        <h1>Connexion</h1>
 
-      <form onSubmit={handleLogin}>
-        <input type="email" placeholder="Email" />
+        <p>
+          Connectez-vous pour finaliser l'achat de votre véhicule Fast Import.
+        </p>
 
-        <input type="password" placeholder="Mot de passe" />
+        <form onSubmit={handleLogin}>
+          <label>Email</label>
 
-        <button>Se connecter</button>
-      </form>
+          <input type="email" placeholder="exemple@email.com" required />
+
+          <label>Mot de passe</label>
+
+          <input type="password" placeholder="********" required />
+
+          <button type="submit">Se connecter</button>
+        </form>
+
+        <p className="register">
+          Pas encore de compte ?<Link to="/register">Créer un compte</Link>
+        </p>
+      </div>
     </main>
   );
 }

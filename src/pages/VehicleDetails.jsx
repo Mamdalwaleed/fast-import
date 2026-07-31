@@ -68,9 +68,7 @@ function VehicleDetails() {
 
           <h2 className="price">{car.price.toLocaleString("fr-FR")} €</h2>
 
-          <button onClick={() => navigate("/payment")}>
-            Acheter maintenant
-          </button>
+          <button onClick={() => navigate("/login")}>Acheter maintenant</button>
         </div>
       </section>
     </main>
