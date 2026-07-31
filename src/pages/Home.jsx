@@ -1,36 +1,31 @@
+import { useEffect, useState } from "react";
 import "./Home.css";
-
 import heroImg from "../assets/hero.png";
-
 import CarCard from "../components/CarCard";
+import { getVehicles } from "../services/vehicleService";
 
 function Home() {
-  const cars = [
-    {
-      id: 1,
-      brand: "BMW",
-      model: "M340i",
-      year: 2023,
-      mileage: 18000,
-      price: 52990,
-      image: heroImg,
-    },
+  const [cars, setCars] = useState([]);
+  const [error, setError] = useState(null);
 
-    {
-      id: 2,
-      brand: "Audi",
-      model: "RS3",
-      year: 2022,
-      mileage: 25000,
-      price: 58990,
-      image: heroImg,
-    },
-  ];
+  useEffect(() => {
+    async function loadVehicles() {
+      try {
+        const data = await getVehicles();
+        setCars(data);
+      } catch (error) {
+        setError(error.message);
+      }
+    }
+
+    loadVehicles();
+  }, []);
 
   return (
     <main>
+      {/* HERO */}
       <section className="hero">
-        <div>
+        <div className="hero-content">
           <h1>
             Votre voiture,
             <br />
@@ -38,22 +33,28 @@ function Home() {
           </h1>
 
           <p>
-            Fast Import sélectionne des véhicules premium en Europe et en
-            France.
+            Fast Import sélectionne et vend des véhicules en provenance d'Europe
+            et disponibles en France.
           </p>
 
-          <button>Voir les véhicules</button>
-        </div>
+          <div className="hero-buttons">
+            <button>Voir les véhicules</button>
 
-        <img src={heroImg} alt="voiture" />
+            <button className="secondary">Importer une voiture</button>
+          </div>
+        </div>
       </section>
 
+      {/* VEHICULES */}
+
       <section className="cars-section">
-        <h2>Nos véhicules</h2>
+        <h2>Nos véhicules disponibles</h2>
+
+        {error && <p>{error}</p>}
 
         <div className="cars-container">
           {cars.map((car) => (
-            <CarCard key={car.id} car={car} />
+            <CarCard key={car._id} car={car} />
           ))}
         </div>
       </section>
