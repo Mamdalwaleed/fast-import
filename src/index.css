@@ -21,3 +21,60 @@ a {
 button {
   cursor: pointer;
 }
+
+/* Fast Import : supprimer l'italique partout */
+html,
+body,
+button,
+input,
+select,
+textarea,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+strong,
+label,
+i,
+em {
+  font-style: normal !important;
+}
+
+:root {
+  --fi-primary: #d71920;
+  --fi-primary-hover: #b9151b;
+  --fi-background: #f5f5f3;
+  --fi-surface: #ffffff;
+  --fi-text: #202020;
+  --fi-muted: #686868;
+  --fi-border: #e8e8e5;
+  --fi-radius: 16px;
+  --fi-shadow: 0 14px 40px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  background: var(--fi-background);
+  color: var(--fi-text);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+img {
+  max-width: 100%;
+}

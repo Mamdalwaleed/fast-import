@@ -1,0 +1,125 @@
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  background: #050505;
+  color: #ffffff;
+  opacity: 1;
+  transition:
+    opacity 700ms ease,
+    transform 700ms ease;
+}
+
+.intro-logo-button {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 18px;
+  padding: 35px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 350ms ease;
+}
+
+.intro-logo-button:hover {
+  transform: scale(1.06);
+}
+
+.intro-logo-button:focus-visible {
+  outline: 2px solid #e10600;
+  outline-offset: 8px;
+}
+
+.intro-logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border: 2px solid #e10600;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  box-shadow: 0 0 35px rgb(225 6 0 / 15%);
+}
+
+.intro-logo-name {
+  font-size: clamp(32px, 6vw, 58px);
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 4px;
+}
+
+.intro-logo-name span {
+  color: #e10600;
+}
+
+.intro-logo-line {
+  width: 65px;
+  height: 3px;
+  background: #e10600;
+  transition: width 350ms ease;
+}
+
+.intro-logo-button:hover .intro-logo-line {
+  width: 120px;
+}
+
+.intro-enter-text {
+  margin-top: 10px;
+  color: #a5a5a5;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  animation: introPulse 2s infinite;
+}
+
+.intro-footer {
+  position: absolute;
+  bottom: 30px;
+  color: #656565;
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+
+.intro-opening {
+  opacity: 0;
+  transform: scale(1.08);
+  pointer-events: none;
+}
+
+.intro-opening .intro-logo-button {
+  transform: scale(1.15);
+}
+
+@keyframes introPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-screen,
+  .intro-logo-button,
+  .intro-logo-line {
+    transition: none;
+  }
+
+  .intro-enter-text {
+    animation: none;
+  }
+}

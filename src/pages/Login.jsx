@@ -1,41 +1,84 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const handleLogin = (event) => {
+    event.preventDefault();
 
-    // Plus tard ici on fera l'appel au backend
-    navigate("/payment");
+    // Démonstration uniquement : à remplacer par
+    // une authentification réelle via le backend.
+    sessionStorage.setItem("customerDemoLoggedIn", "true");
+
+    navigate(location.state?.returnTo || "/payment", {
+      replace: true,
+      state: location.state?.vehicle
+        ? { vehicle: location.state.vehicle }
+        : null,
+    });
   };
 
   return (
     <main className="login-page">
-      <div className="login-card">
-        <h1>Connexion</h1>
+      <section className="login-card">
+        <Link to="/" className="login-brand" aria-label="Fast Import, accueil">
+          <span className="login-brand-icon">FI</span>
+          <span>
+            FAST <strong>IMPORT</strong>
+          </span>
+        </Link>
 
-        <p>
-          Connectez-vous pour finaliser l'achat de votre véhicule Fast Import.
-        </p>
+        <div className="login-heading">
+          <span className="login-eyebrow">VOTRE ESPACE CLIENT</span>
+          <h1>Bienvenue.</h1>
+          <p>
+            Connectez-vous pour poursuivre votre achat et retrouver votre
+            véhicule sélectionné.
+          </p>
+        </div>
 
-        <form onSubmit={handleLogin}>
-          <label>Email</label>
+        <form className="login-form" onSubmit={handleLogin}>
+          <div className="login-field">
+            <label htmlFor="login-email">Adresse e-mail</label>
+            <input
+              id="login-email"
+              name="email"
+              type="email"
+              placeholder="vous@exemple.fr"
+              autoComplete="email"
+              required
+            />
+          </div>
 
-          <input type="email" placeholder="exemple@email.com" required />
+          <div className="login-field">
+            <label htmlFor="login-password">Mot de passe</label>
+            <input
+              id="login-password"
+              name="password"
+              type="password"
+              placeholder="Votre mot de passe"
+              autoComplete="current-password"
+              required
+            />
+          </div>
 
-          <label>Mot de passe</label>
-
-          <input type="password" placeholder="********" required />
-
-          <button type="submit">Se connecter</button>
+          <button type="submit" className="login-submit">
+            Se connecter <span aria-hidden="true">→</span>
+          </button>
         </form>
 
-        <p className="register">
-          Pas encore de compte ?<Link to="/register">Créer un compte</Link>
+        <p className="login-demo-message">
+          Mode démonstration : la vérification réelle du compte sera activée
+          avec le backend.
         </p>
-      </div>
+
+        <div className="login-footer">
+          <span>Vous souhaitez découvrir nos véhicules ?</span>
+          <Link to="/">Voir le catalogue</Link>
+        </div>
+      </section>
     </main>
   );
 }

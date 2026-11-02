@@ -1,117 +1,954 @@
+/* ========================================
+   FAST IMPORT — VEHICLE DETAILS
+======================================== */
+
 .vehicle-page {
-  padding-top: 120px;
-
   min-height: 100vh;
-
-  background: #f5f5f5;
+  padding: 36px 5%;
+  background: #0b0b0b;
+  color: #f5f5f5;
+  font-family: Inter, Arial, sans-serif;
 }
+
+.vehicle-page *,
+.vehicle-page *::before,
+.vehicle-page *::after {
+  box-sizing: border-box;
+}
+
+.vehicle-page-inner {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   LOADING / ERROR STATES
+======================================== */
+
+.vehicle-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.vehicle-state p {
+  color: #d0d0d0;
+  font-size: 16px;
+}
+
+.vehicle-state .vehicle-back-button {
+  margin: 0;
+}
+
+/* ========================================
+   BACK BUTTON
+======================================== */
+
+.vehicle-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  padding: 11px 17px;
+  border: 1px solid #303030;
+  border-radius: 6px;
+  background: #151515;
+  color: #e8e8e8;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.vehicle-back-button:hover {
+  border-color: #e63946;
+  color: #ffffff;
+  background: #1b1b1b;
+}
+
+.vehicle-back-button span {
+  color: #e63946;
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* ========================================
+   MAIN VEHICLE LAYOUT
+======================================== */
 
 .vehicle-container {
-  width: 90%;
-
-  max-width: 1200px;
-
-  margin: auto;
-
-  background: white;
-
-  border-radius: 30px;
-
-  overflow: hidden;
-
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+  align-items: start;
+  gap: 48px;
 }
 
-/* GRANDE IMAGE */
+/* ========================================
+   VEHICLE GALLERY
+======================================== */
 
-.vehicle-image img {
+.vehicle-gallery {
+  min-width: 0;
   width: 100%;
-  height: 400px;
+}
+
+.vehicle-gallery-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.vehicle-gallery-label {
+  color: #eeeeee;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.vehicle-photo-counter {
+  color: #999999;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.vehicle-image {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  background: #151515;
+}
+
+.vehicle-image > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.vehicle-image:hover > img {
+  transform: scale(1.025);
+}
+
+/* No image available */
+
+.vehicle-no-image {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #888888;
+}
+
+.vehicle-no-image span {
+  color: #e63946;
+  font-size: 42px;
+}
+
+.vehicle-no-image p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Image navigation arrows */
+
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: #ffffff;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.gallery-arrow:hover {
+  border-color: #e63946;
+  background: #e63946;
+}
+
+.gallery-arrow-left {
+  left: 15px;
+}
+
+.gallery-arrow-right {
+  right: 15px;
+}
+
+/* Vehicle availability badge */
+
+.vehicle-image-status {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 5px;
+  background: rgba(15, 15, 15, 0.88);
+  color: #eeeeee;
+  font-size: 12px;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #999999;
+}
+
+.vehicle-image-status.available .status-dot {
+  background: #35d07f;
+  box-shadow: 0 0 8px rgba(53, 208, 127, 0.4);
+}
+
+/* Thumbnail images */
+
+.vehicle-thumbnails {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+}
+
+.vehicle-thumbnail {
+  flex: 0 0 92px;
+  height: 70px;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid #303030;
+  border-radius: 6px;
+  background: #151515;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.vehicle-thumbnail:hover,
+.vehicle-thumbnail.active {
+  border-color: #e63946;
+}
+
+.vehicle-thumbnail img {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
-.vehicle-content {
-  padding: 50px;
-}
-
-.vehicle-content h1 {
-  font-size: 50px;
-
-  font-style: italic;
-
-  font-weight: 900;
-}
-
-.description {
-  margin-top: 25px;
-
-  font-size: 20px;
-
-  color: #555;
-
+.gallery-hint {
+  margin: 10px 0 0;
+  color: #777777;
+  font-size: 12px;
   line-height: 1.6;
 }
 
+/* ========================================
+   VEHICLE INFORMATION
+======================================== */
+
+.vehicle-content {
+  min-width: 0;
+  padding: 5px 0;
+}
+
+.vehicle-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  color: #e0e0e0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.vehicle-eyebrow span {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #e63946;
+}
+
+.vehicle-content h1 {
+  margin: 0 0 17px;
+  color: #ffffff;
+  font-size: clamp(30px, 3.2vw, 46px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -1.2px;
+  overflow-wrap: anywhere;
+}
+
+.vehicle-content h1 span {
+  color: #e63946;
+}
+
+.vehicle-subtitle {
+  margin: 0 0 28px;
+  color: #a9a9a9;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* ========================================
+   VEHICLE DESCRIPTION
+======================================== */
+
+.vehicle-description-block {
+  margin: 0 0 28px;
+  padding: 21px;
+  border: 1px solid #292929;
+  border-radius: 8px;
+  background: #121212;
+}
+
+.vehicle-description-block h2 {
+  margin: 0 0 12px;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.vehicle-description-block .description {
+  margin: 0;
+  color: #aaaaaa;
+  font-size: 14px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+/* ========================================
+   SPECIFICATIONS HEADER
+======================================== */
+
+.vehicle-specs-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 15px;
+}
+
+.vehicle-specs-heading h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.vehicle-specs-heading > span {
+  color: #777777;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-align: right;
+}
+
+/* ========================================
+   VEHICLE SPECIFICATIONS GRID
+======================================== */
+
 .vehicle-details-grid {
-  margin-top: 40px;
-
   display: grid;
-
-  grid-template-columns: repeat(4, 1fr);
-
-  gap: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 25px;
 }
 
-.vehicle-details-grid div {
-  background: #f5f5f5;
-
-  padding: 25px;
-
-  border-radius: 20px;
+.vehicle-spec {
+  display: flex;
+  min-width: 0;
+  min-height: 82px;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid #292929;
+  border-radius: 7px;
+  background: #131313;
+  transition: border-color 0.2s ease;
 }
 
-.vehicle-details-grid span {
-  display: block;
-
-  color: #777;
-
-  margin-bottom: 10px;
+.vehicle-spec:hover {
+  border-color: #454545;
 }
 
-.vehicle-details-grid strong {
+.spec-icon {
+  display: flex;
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: rgba(230, 57, 70, 0.1);
+  color: #e63946;
   font-size: 20px;
 }
 
-.price {
-  margin-top: 40px;
-
-  color: #e10600;
-
-  font-size: 45px;
-
-  font-style: italic;
+.vehicle-spec > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 7px;
 }
 
-.vehicle-content button {
-  margin-top: 30px;
-
-  padding: 18px 45px;
-
-  border: none;
-
-  border-radius: 40px;
-
-  background: #111;
-
-  color: white;
-
-  font-size: 18px;
-
-  font-weight: bold;
-
-  font-style: italic;
+.vehicle-spec > div > span {
+  color: #929292;
+  font-size: 11px;
 }
 
-.vehicle-content button:hover {
-  background: #e10600;
+.vehicle-spec strong {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+/* ========================================
+   VEHICLE PRICE
+======================================== */
+
+.vehicle-price-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 25px;
+  padding: 21px;
+  border: 1px solid #343434;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #171717, #101010);
+}
+
+.vehicle-price-label {
+  display: block;
+  margin-bottom: 9px;
+  color: #eeeeee;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+.vehicle-price-note {
+  margin: 0;
+  color: #898989;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.vehicle-price-panel .price {
+  color: #e63946;
+  font-size: clamp(24px, 2.5vw, 34px);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* ========================================
+   BUY NOW BUTTON
+======================================== */
+
+.vehicle-actions {
+  margin-top: 18px;
+}
+
+.appointment-button {
+  display: flex;
+  width: 100%;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 20px;
+  border: 1px solid #e63946;
+  border-radius: 6px;
+  background: #e63946;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.appointment-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: #c92533;
+  background: #c92533;
+}
+
+.appointment-button:focus-visible,
+.appointment-submit:focus-visible {
+  outline: 3px solid rgba(230, 57, 70, 0.5);
+  outline-offset: 3px;
+}
+
+.appointment-button:disabled {
+  border-color: #444444;
+  background: #333333;
+  color: #aaaaaa;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   APPOINTMENT PANEL
+======================================== */
+
+.appointment-panel {
+  width: 100%;
+  max-width: 1000px;
+  margin: 75px auto 15px;
+  padding: 36px;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  background: #111111;
+}
+
+.appointment-heading {
+  max-width: 650px;
+  margin: 0 auto 30px;
+  text-align: center;
+}
+
+.appointment-heading .vehicle-eyebrow {
+  justify-content: center;
+  margin-bottom: 13px;
+  color: #e63946;
+}
+
+.appointment-heading h2 {
+  margin: 0 0 14px;
+  color: #ffffff;
+  font-size: clamp(25px, 3vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.appointment-heading p {
+  margin: 0;
+  color: #a3a3a3;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* ========================================
+   APPOINTMENT FORM
+======================================== */
+
+.appointment-panel form {
+  width: 100%;
+}
+
+.appointment-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.appointment-form-grid label {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 9px;
+  color: #e7e7e7;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.appointment-form-grid .appointment-full {
+  grid-column: 1 / -1;
+}
+
+.appointment-form-grid input,
+.appointment-form-grid select,
+.appointment-form-grid textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid #353535;
+  border-radius: 6px;
+  outline: none;
+  background: #0b0b0b;
+  color: #f5f5f5;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.appointment-form-grid input::placeholder,
+.appointment-form-grid textarea::placeholder {
+  color: #6f6f6f;
+}
+
+.appointment-form-grid input:focus,
+.appointment-form-grid select:focus,
+.appointment-form-grid textarea:focus {
+  border-color: #e63946;
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
+}
+
+.appointment-form-grid input[type="date"],
+.appointment-form-grid input[type="time"] {
+  color-scheme: dark;
+}
+
+.appointment-form-grid select {
+  cursor: pointer;
+}
+
+.appointment-form-grid textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.appointment-form-grid input:disabled,
+.appointment-form-grid select:disabled,
+.appointment-form-grid textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   SUBMIT BUTTON
+======================================== */
+
+.appointment-submit {
+  display: flex;
+  width: 100%;
+  min-height: 53px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+  padding: 15px 20px;
+  border: 1px solid #e63946;
+  border-radius: 6px;
+  background: #e63946;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.appointment-submit:hover:not(:disabled) {
+  background: #c92533;
+  border-color: #c92533;
+}
+
+.appointment-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   FORM SUCCESS / ERROR MESSAGES
+======================================== */
+
+.appointment-success,
+.appointment-error {
+  margin: 0 0 22px;
+  padding: 14px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.appointment-success {
+  border: 1px solid #276644;
+  background: #10251a;
+  color: #a8efc3;
+}
+
+.appointment-error {
+  border: 1px solid #7c2c33;
+  background: #2a1114;
+  color: #ffb5bc;
+}
+
+/* ========================================
+   LEGAL NOTE
+======================================== */
+
+.appointment-legal {
+  margin: 15px 0 0;
+  color: #777777;
+  font-size: 11px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 1050px) {
+  .vehicle-page {
+    padding: 30px 4%;
+  }
+
+  .vehicle-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 35px;
+  }
+
+  .vehicle-image {
+    height: 430px;
+  }
+
+  .vehicle-content {
+    padding: 0;
+  }
+
+  .vehicle-content h1 {
+    font-size: 38px;
+  }
+
+  .appointment-panel {
+    margin-top: 55px;
+  }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+  .vehicle-page {
+    padding: 22px 15px;
+  }
+
+  .vehicle-back-button {
+    margin-bottom: 22px;
+    padding: 10px 13px;
+    font-size: 13px;
+  }
+
+  .vehicle-container {
+    gap: 27px;
+  }
+
+  .vehicle-gallery-topline {
+    margin-bottom: 12px;
+  }
+
+  .vehicle-gallery-label {
+    font-size: 10px;
+    letter-spacing: 1.2px;
+  }
+
+  .vehicle-image {
+    height: 270px;
+    border-radius: 8px;
+  }
+
+  .vehicle-image-status {
+    top: 10px;
+    left: 10px;
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+
+  .gallery-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 26px;
+  }
+
+  .gallery-arrow-left {
+    left: 9px;
+  }
+
+  .gallery-arrow-right {
+    right: 9px;
+  }
+
+  .vehicle-thumbnail {
+    flex-basis: 75px;
+    height: 58px;
+  }
+
+  .vehicle-eyebrow {
+    margin-bottom: 15px;
+    font-size: 10px;
+    letter-spacing: 1.3px;
+  }
+
+  .vehicle-content h1 {
+    font-size: 31px;
+    letter-spacing: -0.7px;
+  }
+
+  .vehicle-subtitle {
+    margin-bottom: 23px;
+    font-size: 13px;
+  }
+
+  .vehicle-description-block {
+    padding: 17px;
+  }
+
+  .vehicle-specs-heading h2 {
+    font-size: 17px;
+  }
+
+  .vehicle-specs-heading > span {
+    font-size: 8px;
+    letter-spacing: 0.7px;
+  }
+
+  .vehicle-details-grid {
+    gap: 9px;
+  }
+
+  .vehicle-spec {
+    min-height: 76px;
+    gap: 9px;
+    padding: 10px;
+  }
+
+  .spec-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 17px;
+  }
+
+  .vehicle-spec > div > span {
+    font-size: 10px;
+  }
+
+  .vehicle-spec strong {
+    font-size: 12px;
+  }
+
+  .vehicle-price-panel {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .vehicle-price-panel .price {
+    font-size: 29px;
+  }
+
+  .appointment-panel {
+    margin-top: 45px;
+    padding: 25px 17px;
+    border-radius: 8px;
+  }
+
+  .appointment-heading {
+    margin-bottom: 25px;
+  }
+
+  .appointment-heading h2 {
+    font-size: 25px;
+  }
+
+  .appointment-heading p {
+    font-size: 13px;
+  }
+
+  .appointment-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 17px;
+  }
+
+  .appointment-form-grid .appointment-full {
+    grid-column: auto;
+  }
+
+  .appointment-form-grid label {
+    font-size: 13px;
+  }
+
+  .appointment-form-grid input,
+  .appointment-form-grid select,
+  .appointment-form-grid textarea {
+    min-height: 47px;
+    font-size: 14px;
+  }
+
+  .appointment-submit {
+    min-height: 51px;
+    font-size: 13px;
+  }
+}
+
+/* ========================================
+   VERY SMALL MOBILE
+======================================== */
+
+@media (max-width: 360px) {
+  .vehicle-page {
+    padding: 18px 11px;
+  }
+
+  .vehicle-image {
+    height: 225px;
+  }
+
+  .vehicle-content h1 {
+    font-size: 27px;
+  }
+
+  .vehicle-details-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .vehicle-spec {
+    min-height: 65px;
+  }
+
+  .appointment-panel {
+    padding: 21px 13px;
+  }
+
+  .vehicle-price-panel .price {
+    font-size: 26px;
+  }
 }
